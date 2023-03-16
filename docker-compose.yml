@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    privileged: true
+    volumes:
+      - ./prometheus/etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
+    ports:
+      - "9090:9090"
+    restart: always
+
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana/data_grafana:/var/lib/grafana
+      - ./grafana/config:/etc/grafana
+      - ./grafana/config/provisioning:/etc/grafana/provisioning
+    env_file:
+      - ./grafana/config/config.monitoring
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    restart: always
+  
+  
+  blackbox_exporter:
+    image: prom/blackbox-exporter
+    volumes:
+      - ./blackbox_exporter/blackbox.yml:/config/blackbox.yml
+    command:
+      - '--config.file=/config/blackbox.yml'
+    ports:
+      - 9115:9115
+    restart: always
