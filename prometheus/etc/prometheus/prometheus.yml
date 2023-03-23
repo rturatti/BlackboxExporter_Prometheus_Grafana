@@ -16,8 +16,61 @@ scrape_configs:
       module: [http_2xx]
     static_configs:
       - targets:
-        - https://prometheus.io
-        - http://prometheus.io
+        # - https://prometheus.io
+        # - http://prometheus.io
+        - https://google.com
+        - https://uol.com.br
+        # - https://linuxtips.io
+        # - https://turatti.devops/probe
+        # - https://globo.com
+        # - https://github.com
+        # - https://mercadolivre.com.br
+        # - https://gitlab.com
+        # - https://www.youtube.com
+        # - https://www.facebook.com
+        # - https://www.instagram.com
+        # - https://www.linkedin.com
+        # - https://www.twitter.com
+        # - https://azure.microsoft.com
+        # - https://aws.amazon.com
+        # - https://www.oracle.com
+        # - https://www.redhat.com
+        # - https://www.vmware.com
+        # - https://www.docker.com
+        # - https://www.cisco.com
+        # - https://www.paloaltonetworks.com
+        # - https://cloud.google.com
+        # - https://terraform.io
+        # - https://www.ansible.com
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox_exporter:9115
+
+  - job_name: 'blackbox_regexp'
+    metrics_path: /probe
+    params:
+      module: [https_regex_running]
+    static_configs:
+      - targets:
+        - https://globo.com
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox_exporter:9115
+
+    - job_name: 'blackbox_regexp'
+    metrics_path: /probe
+    params:
+      module: [https_regex_ok]
+    static_configs:
+      - targets:
         - https://google.com
     relabel_configs:
       - source_labels: [__address__]
