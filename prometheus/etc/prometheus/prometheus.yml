@@ -50,7 +50,7 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox_exporter:9115
 
-  - job_name: 'blackbox_regexp'
+  - job_name: 'blackbox_regex_running'
     metrics_path: /probe
     params:
       module: [https_regex_running]
@@ -65,7 +65,7 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox_exporter:9115
 
-    - job_name: 'blackbox_regexp'
+  - job_name: 'blackbox_regex_ok'
     metrics_path: /probe
     params:
       module: [https_regex_ok]
