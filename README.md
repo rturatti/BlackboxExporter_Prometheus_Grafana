@@ -1,2 +1,2 @@
-# BlackboxExporter_Prometheus_Grafana
-Repositório de testes do Blackbock junto com Prometheus e Grafana
+# Observabilidade_BlackBox_Exporter
+Repositório do Blackbock junto com Prometheus e Grafana
