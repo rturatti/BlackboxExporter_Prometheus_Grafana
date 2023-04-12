@@ -3,7 +3,8 @@ Repositório do Blackbock junto com Prometheus e Grafana
 
 ## Instruções de uso
 
-Para iniciar os containers utilize o comando abaixo. \n
+Para iniciar os containers utilize o comando abaixo.
+
 `docker-compose up -d`
 
 Será inicializado os containers, para acessar o Grafana acesso via `http://localhost:3000` com usuário **admin** e a senha **Grafana123**.
